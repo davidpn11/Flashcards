@@ -4,6 +4,8 @@ import { colorPrimary, colorPrimaryDark, white } from './utils/colors'
 import { Constants } from 'expo'
 import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import { isAndroid } from './utils/helpers'
+import Deck from './components/Deck'
+
 function MainStatusBar({ ...props }) {
   return (
     <View
@@ -12,7 +14,7 @@ function MainStatusBar({ ...props }) {
         height: Constants.statusBarHeight,
       }}
     >
-      <StatusBar translucent backgroundColor={colorPrimary} {...props} />
+      <StatusBar translucent stlye={styles.statusBar} {...props} />
     </View>
   )
 }
@@ -29,6 +31,7 @@ export default class App extends React.Component {
             <Ionicons name="ios-search" size={30} color={white} />
           )}
         </View>
+        <Deck />
       </View>
     )
   }
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   statusBar: {
-    backgroundColor: '#C2185B',
+    backgroundColor: colorPrimary,
     height: Constants.statusBarHeight,
   },
   toolbar: {
@@ -51,5 +54,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     paddingRight: 10,
+    shadowColor: 'rgba(0, 0, 0, 0.24)',
+    elevation: 2,
   },
 })
