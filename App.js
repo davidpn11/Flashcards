@@ -5,17 +5,32 @@ import {
   colorPrimaryDark,
   white,
   colorAccent,
+  whitesmoke,
 } from './utils/colors'
-import { Constants } from 'expo'
-import { MaterialIcons, Ionicons } from '@expo/vector-icons'
 import { isAndroid } from './utils/helpers'
-import Deck from './components/Deck'
-import Header from './components/Header'
-import FloatButton from './components/FloatButton'
-import Card from './components/Card'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
+import styled from 'styled-components'
+import {
+  Provider as PaperProvider,
+  DefaultTheme,
+  FAB,
+} from 'react-native-paper'
+import MainToolbar from './components/MainToolbar'
+import Deck from './components/Deck'
+
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: colorPrimary,
+    accent: colorAccent,
+    background: white,
+    paper: whitesmoke,
+  },
+}
 
 export default class App extends React.Component {
   addDeck(event) {
@@ -24,19 +39,17 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
-        <View style={styles.container}>
-          <Header />
-          <Card>
-            <Text>oi</Text>
-          </Card>
-          <View style={styles.fabWrapper}>
-            <FloatButton
-              color={colorAccent}
-              onClick={this.addDeck}
-              icon={<MaterialIcons name="add" size={30} color={white} />}
-            />
+        <PaperProvider theme={theme}>
+          <MainToolbar
+            title="Flashcards"
+            onSearch={() => this.addDeck()}
+            onBackPress={() => this.addDeck()}
+          />
+          <View style={styles.container}>
+            <Deck onClick={() => this.addDeck()} title="titulo" nCards="5" />
+            <FAB style={styles.fabStyle} medium icon="add" onPress={() => {}} />
           </View>
-        </View>
+        </PaperProvider>
       </Provider>
     )
   }
@@ -44,9 +57,12 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'column',
     flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
-  fabWrapper: {
+  fabStyle: {
     position: 'absolute',
     bottom: 20,
     right: 20,

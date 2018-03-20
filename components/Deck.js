@@ -1,24 +1,45 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import styled from 'styled-components'
+import { Card } from 'react-native-paper'
+import { isAndroid } from '../utils/helpers'
+import PropTypes from 'prop-types'
 
-const Wrapper = styled.View`
+const DeckCard = styled(Card)`
+  min-height: 50px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
-  height: 30px;
-  margin: 20px 10px 10px 10px;
-  background-color: #fff;
-  shadow-color: #bcc0c3;
-  shadow-offset: 0px 0px;
-  shadow-opacity: 1;
-  shadow-radius: 4;
-  elevation: 3;
+`
+
+const Title = styled.Text`
+  font-weight: ${isAndroid ? 400 : 600};
+  font-size: 18px;
+  width: 100%;
+`
+
+const NCards = styled.Text`
+  font-size: 12px;
+  width: 100%;
+  display: flex;
+  text-align: right;
 `
 
 class Deck extends Component {
+  static propTypes = {
+    onClick: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    nCards: PropTypes.string.isRequired,
+  }
+
   render() {
-    return <Wrapper style={{ height: 30 }} />
+    const { onClick, title, nCards } = this.props
+    return (
+      <DeckCard onPress={this.props.onClick}>
+        <Title>{title}</Title>
+        <NCards>{nCards} cards</NCards>
+      </DeckCard>
+    )
   }
 }
 
