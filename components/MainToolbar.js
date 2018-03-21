@@ -12,8 +12,6 @@ export default function MainToolbar({
   title,
   subtitle,
 }) {
-  console.log(onBackPress)
-  console.log(onSearch)
   return (
     <Toolbar>
       {onBackPress && <ToolbarBackAction onPress={onBackPress} />}

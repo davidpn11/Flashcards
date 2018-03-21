@@ -6,6 +6,7 @@ import { isAndroid } from '../utils/helpers'
 import PropTypes from 'prop-types'
 
 const DeckCard = styled(Card)`
+  margin-top: 10px;
   min-height: 50px;
   padding: 10px;
   display: flex;
@@ -29,7 +30,7 @@ class Deck extends Component {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    nCards: PropTypes.string.isRequired,
+    nCards: PropTypes.number.isRequired,
   }
 
   render() {

@@ -1,6 +1,20 @@
 import { GET_DECKS, ADD_DECK } from '../actions'
 
-export default function(state = {}, action) {
+const initialState = {
+  decks: [
+    {
+      title: 'david',
+      cards: [
+        { title: 'teste' },
+        { title: 'teste2' },
+        { title: 'teste3' },
+        { title: 'teste4' },
+      ],
+    },
+  ],
+}
+
+export default function(state = initialState, action) {
   switch (action.type) {
     case GET_DECKS:
       console.log(state, action)

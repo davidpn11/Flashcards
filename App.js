@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, StatusBar, Text, View } from 'react-native'
 import {
   colorPrimary,
@@ -18,7 +18,7 @@ import {
   FAB,
 } from 'react-native-paper'
 import MainToolbar from './components/MainToolbar'
-import Deck from './components/Deck'
+import DeckList from './components/DeckList'
 
 const theme = {
   ...DefaultTheme,
@@ -32,10 +32,11 @@ const theme = {
   },
 }
 
-export default class App extends React.Component {
+class App extends Component {
   addDeck(event) {
     console.log('teste')
   }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>
@@ -45,8 +46,8 @@ export default class App extends React.Component {
             onSearch={() => this.addDeck()}
             onBackPress={() => this.addDeck()}
           />
+          <DeckList />
           <View style={styles.container}>
-            <Deck onClick={() => this.addDeck()} title="titulo" nCards="5" />
             <FAB style={styles.fabStyle} medium icon="add" onPress={() => {}} />
           </View>
         </PaperProvider>
@@ -57,6 +58,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
     flexDirection: 'column',
     flex: 1,
     paddingLeft: 15,
@@ -68,3 +70,5 @@ const styles = StyleSheet.create({
     right: 20,
   },
 })
+
+export default App
