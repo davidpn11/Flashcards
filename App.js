@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { StyleSheet, StatusBar, Text, View } from 'react-native'
 import {
   colorPrimary,
   colorPrimaryDark,
@@ -7,18 +6,36 @@ import {
   colorAccent,
   whitesmoke,
 } from './utils/colors'
-import { isAndroid } from './utils/helpers'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
-import styled from 'styled-components'
 import {
   Provider as PaperProvider,
   DefaultTheme,
   FAB,
 } from 'react-native-paper'
+import DeckView from './containers/DeckView'
+import NewDeckView from './containers/NewDeckView'
+import { StackNavigator } from 'react-navigation'
 import MainToolbar from './components/MainToolbar'
-import DeckList from './components/DeckList'
+
+const MainNav = StackNavigator(
+  {
+    Home: {
+      screen: DeckView,
+    },
+    NewDeck: {
+      screen: NewDeckView,
+    },
+  },
+  {
+    initialRouteName: 'Home',
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    },
+  }
+)
 
 const theme = {
   ...DefaultTheme,
@@ -41,34 +58,11 @@ class App extends Component {
     return (
       <Provider store={createStore(reducer)}>
         <PaperProvider theme={theme}>
-          <MainToolbar
-            title="Flashcards"
-            onSearch={() => this.addDeck()}
-            onBackPress={() => this.addDeck()}
-          />
-          <DeckList />
-          <View style={styles.container}>
-            <FAB style={styles.fabStyle} medium icon="add" onPress={() => {}} />
-          </View>
+          <MainNav />
         </PaperProvider>
       </Provider>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    flexDirection: 'column',
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-  },
-  fabStyle: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-  },
-})
 
 export default App

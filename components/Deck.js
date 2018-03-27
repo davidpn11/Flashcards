@@ -29,15 +29,15 @@ const NCards = styled.Text`
 class Deck extends Component {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     nCards: PropTypes.number.isRequired,
   }
 
   render() {
-    const { onClick, title, nCards } = this.props
+    const { onClick, name, nCards } = this.props
     return (
       <DeckCard onPress={this.props.onClick}>
-        <Title>{title}</Title>
+        <Title>{name}</Title>
         <NCards>{nCards} cards</NCards>
       </DeckCard>
     )

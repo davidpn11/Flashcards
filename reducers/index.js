@@ -3,7 +3,16 @@ import { GET_DECKS, ADD_DECK } from '../actions'
 const initialState = {
   decks: [
     {
-      title: 'david',
+      name: 'david',
+      cards: [
+        { title: 'teste' },
+        { title: 'teste2' },
+        { title: 'teste3' },
+        { title: 'teste4' },
+      ],
+    },
+    {
+      name: 'teste2',
       cards: [
         { title: 'teste' },
         { title: 'teste2' },

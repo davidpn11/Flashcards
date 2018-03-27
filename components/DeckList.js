@@ -20,16 +20,15 @@ class DeckList extends Component {
 
   componentDidMount() {
     this.props.getDecks && this.props.getDecks()
-    console.log(this.props.decks)
   }
 
   getDecks() {
     const { decks } = this.props
     return _.map(decks, (el) => (
       <Deck
-        key={el.title}
+        key={el.name}
         onClick={() => this.addDeck()}
-        title={el.title}
+        name={el.name}
         nCards={el.cards.length}
       />
     ))
@@ -45,7 +44,6 @@ class DeckList extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state', state)
   return { decks: state.decks }
 }
 
