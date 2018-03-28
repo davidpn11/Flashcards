@@ -18,7 +18,7 @@ class NewDeckView extends Component {
 
   addDeck() {
     const { name } = this.state
-    this.props.addDeck({ name }).then((res) => console.log(res))
+    this.props.addDeck({ name }).then(() => this.props.navigation.goBack())
   }
 
   render() {

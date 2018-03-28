@@ -3,6 +3,7 @@ export const ADD_DECK = 'ADD_DECK'
 
 //@flow
 export function getDecks() {
+  console.log('getDecks')
   return {
     type: GET_DECKS,
     data: [],
@@ -10,9 +11,10 @@ export function getDecks() {
 }
 
 export const addDeck = (deck: object) => (dispatch) => {
-  console.log(deck)
-  return dispatch({
-    type: ADD_DECK,
-    data: deck,
-  })
+  return new Promise((resolve) => resolve()).then(() =>
+    dispatch({
+      type: ADD_DECK,
+      data: deck,
+    })
+  )
 }

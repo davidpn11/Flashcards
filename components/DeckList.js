@@ -18,11 +18,16 @@ class DeckList extends Component {
     getDecks: PropTypes.any,
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps')
+    console.log(nextProps)
+  }
+
   componentDidMount() {
     this.props.getDecks && this.props.getDecks()
   }
 
-  getDecks() {
+  getUserDecks() {
     const { decks } = this.props
     return _.map(decks, (el) => (
       <Deck
@@ -39,7 +44,7 @@ class DeckList extends Component {
   }
 
   render() {
-    return <Wrapper>{this.getDecks()}</Wrapper>
+    return <Wrapper>{this.getUserDecks()}</Wrapper>
   }
 }
 
@@ -47,4 +52,4 @@ function mapStateToProps(state) {
   return { decks: state.decks }
 }
 
-export default connect(mapStateToProps)(DeckList)
+export default connect(mapStateToProps, { getDecks })(DeckList)

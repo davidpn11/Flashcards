@@ -26,12 +26,14 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_DECKS:
-      console.log(state, action)
+      console.log('GET_DECKS')
       return {
         ...state,
       }
     case ADD_DECK:
-      console.log('add', action)
+      const data = { cards: [], ...action.data }
+      const z = state.decks.concat(data)
+      console.log(z)
       return {
         ...state,
       }

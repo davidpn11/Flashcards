@@ -6,7 +6,7 @@ import {
   colorAccent,
   whitesmoke,
 } from './utils/colors'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import {
@@ -20,6 +20,8 @@ import { StackNavigator } from 'react-navigation'
 import MainToolbar from './components/MainToolbar'
 import thunk from 'redux-thunk'
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 const MainNav = StackNavigator(
   {
     Home: {
@@ -30,7 +32,7 @@ const MainNav = StackNavigator(
     },
   },
   {
-    initialRouteName: 'NewDeck',
+    initialRouteName: 'Home',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false,
@@ -57,7 +59,9 @@ class App extends Component {
 
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider
+        store={createStore(reducer, composeEnhancers(applyMiddleware(thunk)))}
+      >
         <PaperProvider theme={theme}>
           <MainNav />
         </PaperProvider>
