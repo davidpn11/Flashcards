@@ -31,6 +31,7 @@ export default function(state = initialState, action) {
         ...state,
       }
     case ADD_DECK:
+      console.log('add', action)
       return {
         ...state,
       }

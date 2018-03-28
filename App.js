@@ -18,6 +18,7 @@ import DeckView from './containers/DeckView'
 import NewDeckView from './containers/NewDeckView'
 import { StackNavigator } from 'react-navigation'
 import MainToolbar from './components/MainToolbar'
+import thunk from 'redux-thunk'
 
 const MainNav = StackNavigator(
   {
@@ -29,7 +30,7 @@ const MainNav = StackNavigator(
     },
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'NewDeck',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false,

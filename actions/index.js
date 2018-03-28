@@ -9,9 +9,10 @@ export function getDecks() {
   }
 }
 
-export function addDeck(deck: object) {
-  return {
+export const addDeck = (deck: object) => (dispatch) => {
+  console.log(deck)
+  return dispatch({
     type: ADD_DECK,
     data: deck,
-  }
+  })
 }
