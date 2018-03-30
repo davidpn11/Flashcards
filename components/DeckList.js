@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import Deck from './Deck'
 import { connect } from 'react-redux'
 import { getDecks } from '../actions'
@@ -35,7 +35,11 @@ class DeckList extends Component {
   }
 
   render() {
-    return <Wrapper>{this.getUserDecks()}</Wrapper>
+    return (
+      <Wrapper>
+        <ScrollView>{this.getUserDecks()}</ScrollView>
+      </Wrapper>
+    )
   }
 }
 

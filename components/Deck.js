@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Animated } from 'react-native'
 import styled from 'styled-components'
 import { Card } from 'react-native-paper'
 import { isAndroid } from '../utils/helpers'
@@ -33,13 +33,31 @@ class Deck extends Component {
     nCards: PropTypes.number.isRequired,
   }
 
+  state = {
+    marginLeft: new Animated.Value(300),
+  }
+  componentDidMount() {
+    this.slideIn()
+  }
+
+  slideIn() {
+    const { marginLeft } = this.state
+    Animated.timing(marginLeft, {
+      toValue: 0,
+      duration: 200,
+    }).start()
+  }
+
   render() {
     const { onClick, name, nCards } = this.props
+    const { marginLeft } = this.state
     return (
-      <DeckCard onPress={this.props.onClick}>
-        <Title>{name}</Title>
-        <NCards>{nCards} cards</NCards>
-      </DeckCard>
+      <Animated.View style={{ marginLeft }}>
+        <DeckCard onPress={this.props.onClick}>
+          <Title>{name}</Title>
+          <NCards>{nCards} cards</NCards>
+        </DeckCard>
+      </Animated.View>
     )
   }
 }
