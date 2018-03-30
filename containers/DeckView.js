@@ -12,12 +12,17 @@ class DeckView extends Component {
 
   searchDeck() {}
 
+  openDeck(deck) {
+    deck = JSON.stringify(deck)
+    this.props.navigation.navigate('DeckDetail', { deck })
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
         <MainToolbar title="Flashcards" onSearch={() => this.searchDeck()} />
         <View style={styles.container}>
-          <DeckList />
+          <DeckList openDeck={(deck) => this.openDeck(deck)} />
           <FAB
             style={styles.fabStyle}
             medium

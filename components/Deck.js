@@ -53,7 +53,7 @@ class Deck extends Component {
     const { marginLeft } = this.state
     return (
       <Animated.View style={{ marginLeft }}>
-        <DeckCard onPress={this.props.onClick}>
+        <DeckCard onPress={() => this.props.onClick(this.props.name)}>
           <Title>{name}</Title>
           <NCards>{nCards} cards</NCards>
         </DeckCard>
