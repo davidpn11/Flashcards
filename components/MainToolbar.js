@@ -11,12 +11,14 @@ export default function MainToolbar({
   onSearch,
   title,
   subtitle,
+  onRemove,
 }) {
   return (
     <Toolbar>
       {onBackPress && <ToolbarBackAction onPress={onBackPress} />}
       <ToolbarContent title={title} subtitle={subtitle} />
       {onSearch && <ToolbarAction icon="search" onPress={onSearch} />}
+      {onRemove && <ToolbarAction icon="delete" onPress={onRemove} />}
     </Toolbar>
   )
 }
