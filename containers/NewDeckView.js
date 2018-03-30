@@ -18,7 +18,10 @@ class NewDeckView extends Component {
 
   addDeck() {
     const { name } = this.state
-    this.props.addDeck({ name }).then(() => this.props.navigation.goBack())
+    this.props
+      .addDeck({ name })
+      .then((data) => this.props.navigation.goBack())
+      .catch((err) => alert('NAME ALREADY EXISTS'))
   }
 
   render() {

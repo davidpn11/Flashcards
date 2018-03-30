@@ -14,13 +14,8 @@ const Wrapper = styled.View`
 
 class DeckList extends Component {
   static propTypes = {
-    decks: PropTypes.array,
+    decks: PropTypes.any,
     getDecks: PropTypes.any,
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps')
-    console.log(nextProps)
   }
 
   componentDidMount() {
@@ -39,16 +34,13 @@ class DeckList extends Component {
     ))
   }
 
-  addDeck() {
-    console.log('clicke')
-  }
-
   render() {
     return <Wrapper>{this.getUserDecks()}</Wrapper>
   }
 }
 
 function mapStateToProps(state) {
+  console.log('deckList', state)
   return { decks: state.decks }
 }
 

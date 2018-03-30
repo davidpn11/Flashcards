@@ -1,6 +1,7 @@
 import { Platform, TouchableNativeFeedback } from 'react-native'
 
 export const isAndroid = Platform.OS === 'android'
+export const DECK_STORAGE_KEY = 'FlashCards:DeckStorageKey'
 
 export const touchableBackground = (color, fixRadius) => {
   if (isAndroid) {

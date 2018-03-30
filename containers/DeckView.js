@@ -10,10 +10,12 @@ class DeckView extends Component {
     navigation: PropTypes.object.isRequired,
   }
 
+  searchDeck() {}
+
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <MainToolbar title="Flashcards" onSearch={() => this.addDeck()} />
+        <MainToolbar title="Flashcards" onSearch={() => this.searchDeck()} />
         <View style={styles.container}>
           <DeckList />
           <FAB

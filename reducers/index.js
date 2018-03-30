@@ -1,43 +1,30 @@
-import { GET_DECKS, ADD_DECK } from '../actions'
+import { GET_DECKS, ADD_DECK } from '../actions/constants'
+import { combineReducers } from 'redux'
+const initialState = {}
 
-const initialState = {
-  decks: [
-    {
-      name: 'david',
-      cards: [
-        { title: 'teste' },
-        { title: 'teste2' },
-        { title: 'teste3' },
-        { title: 'teste4' },
-      ],
-    },
-    {
-      name: 'teste2',
-      cards: [
-        { title: 'teste' },
-        { title: 'teste2' },
-        { title: 'teste3' },
-        { title: 'teste4' },
-      ],
-    },
-  ],
-}
-
-export default function(state = initialState, action) {
+function deckReducer(state = initialState, action) {
   switch (action.type) {
     case GET_DECKS:
-      console.log('GET_DECKS')
-      return {
-        ...state,
-      }
+      return action.data
     case ADD_DECK:
-      const data = { cards: [], ...action.data }
-      const z = state.decks.concat(data)
-      console.log(z)
-      return {
-        ...state,
-      }
+      return [action.data, ...state]
     default:
       return state
   }
 }
+
+function deckDetailReducer(state = initialState, action) {
+  switch (action.type) {
+    case GET_DECKS:
+      break
+
+    default:
+      break
+  }
+}
+
+const rootReducer = combineReducers({
+  decks: deckReducer,
+})
+
+export default rootReducer
