@@ -16,10 +16,16 @@ class DeckList extends Component {
   static propTypes = {
     decks: PropTypes.any,
     getDecks: PropTypes.any,
+    openDeck: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
     this.props.getDecks && this.props.getDecks()
+  }
+
+  openDeck(name) {
+    const deck = this.props.decks.find((d) => d.name === name)
+    this.props.openDeck(deck)
   }
 
   getUserDecks() {
@@ -27,7 +33,7 @@ class DeckList extends Component {
     return _.map(decks, (el) => (
       <Deck
         key={el.name}
-        onClick={() => this.addDeck()}
+        onClick={(name) => this.openDeck(name)}
         name={el.name}
         nCards={el.cards.length}
       />
