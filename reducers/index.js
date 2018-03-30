@@ -1,6 +1,6 @@
-import { GET_DECKS, ADD_DECK } from '../actions/constants'
+import { GET_DECKS, ADD_DECK, REMOVE_DECK } from '../actions/constants'
 import { combineReducers } from 'redux'
-const initialState = {}
+const initialState = []
 
 function deckReducer(state = initialState, action) {
   switch (action.type) {
@@ -8,18 +8,10 @@ function deckReducer(state = initialState, action) {
       return action.data
     case ADD_DECK:
       return [action.data, ...state]
+    case REMOVE_DECK:
+      return state.filter((deck) => deck.name !== action.data)
     default:
       return state
-  }
-}
-
-function deckDetailReducer(state = initialState, action) {
-  switch (action.type) {
-    case GET_DECKS:
-      break
-
-    default:
-      break
   }
 }
 

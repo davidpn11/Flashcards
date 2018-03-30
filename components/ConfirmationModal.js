@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { cancelColor } from '../utils/colors'
 import {
   Modal,
   Button,
@@ -34,7 +35,7 @@ export default function ConfirmationModal({
           <Title>{modalText}</Title>
         </CardContent>
         <Actions>
-          <Button onPress={() => onCancel()} color="red">
+          <Button onPress={() => onCancel()} color={cancelColor}>
             Cancel
           </Button>
           <Button onPress={() => onConfirm()}>Confirm</Button>

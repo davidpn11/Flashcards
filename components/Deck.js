@@ -44,7 +44,7 @@ class Deck extends Component {
     const { marginLeft } = this.state
     Animated.timing(marginLeft, {
       toValue: 0,
-      duration: 200,
+      duration: 100,
     }).start()
   }
 

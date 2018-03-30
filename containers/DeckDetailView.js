@@ -3,10 +3,13 @@ import { View, Text } from 'react-native'
 import MainToolbar from '../components/MainToolbar'
 import ConfirmationModal from '../components/ConfirmationModal'
 import PropTypes from 'prop-types'
+import { removeDeck } from '../actions'
+import { connect } from 'react-redux'
 
 class DeckDetailView extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
+    removeDeck: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -28,7 +31,9 @@ class DeckDetailView extends Component {
   _hideModal = () => this.setState({ visible: false })
 
   removeDeck() {
-    this._showModal()
+    const { name } = this.state.deck
+    this._hideModal()
+    this.props.removeDeck(name).then((result) => this.props.navigation.goBack())
   }
 
   render() {
@@ -38,13 +43,13 @@ class DeckDetailView extends Component {
       <View style={{ flex: 1 }}>
         <MainToolbar
           title={name}
-          onRemove={() => this.removeDeck()}
+          onRemove={() => this._showModal()}
           onBackPress={() => this.props.navigation.goBack()}
         />
         <ConfirmationModal
           isToggle={visible}
           onCancel={() => this._hideModal()}
-          onConfirm={() => this._hideModal()}
+          onConfirm={() => this.removeDeck()}
           modalText="Do you want to delete this deck?"
         />
       </View>
@@ -52,4 +57,4 @@ class DeckDetailView extends Component {
   }
 }
 
-export default DeckDetailView
+export default connect(null, { removeDeck })(DeckDetailView)

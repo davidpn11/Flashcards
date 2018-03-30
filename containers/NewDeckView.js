@@ -20,8 +20,11 @@ class NewDeckView extends Component {
     const { name } = this.state
     this.props
       .addDeck({ name })
-      .then((data) => this.props.navigation.goBack())
-      .catch((err) => alert('NAME ALREADY EXISTS'))
+      .then(() => this.props.navigation.goBack())
+      .catch((err) => {
+        console.log('err', err)
+        alert(err.message.toUpperCase())
+      })
   }
 
   render() {
