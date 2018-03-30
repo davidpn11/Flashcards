@@ -16,6 +16,7 @@ import {
 } from 'react-native-paper'
 import DeckView from './containers/DeckView'
 import NewDeckView from './containers/NewDeckView'
+import DeckDetailView from './containers/DeckDetailView'
 import { StackNavigator } from 'react-navigation'
 import MainToolbar from './components/MainToolbar'
 import thunk from 'redux-thunk'
@@ -29,6 +30,9 @@ const MainNav = StackNavigator(
     },
     NewDeck: {
       screen: NewDeckView,
+    },
+    DeckDetail: {
+      screen: DeckDetailView,
     },
   },
   {
