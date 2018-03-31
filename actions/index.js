@@ -1,8 +1,16 @@
-import { GET_DECKS, ADD_DECK, REMOVE_DECK } from './constants'
+import {
+  GET_DECKS,
+  ADD_DECK,
+  REMOVE_DECK,
+  ADD_CARD,
+  REMOVE_CARD,
+} from './constants'
 import {
   getDecksStorage,
   addDeckStorage,
   removeDeckStorage,
+  addCardStorage,
+  removeCardStorage,
 } from '../utils/api'
 
 //@flow
@@ -42,4 +50,8 @@ export const removeDeck = (name: string) => (dispatch) => {
       data: name,
     })
   })
+}
+
+export const addCard = (card: object, deckName: string) => {
+  addCardStorage(card, deckName).then((deck) => console.log('yahaaaa', deck))
 }

@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 import { DECK_STORAGE_KEY } from './helpers'
-
+import uuid from 'uuid'
 //@flow
 
 export function deleteDeckStorage() {
@@ -44,3 +44,26 @@ export function removeDeckStorage(name: string) {
     }
   })
 }
+
+export function addCardStorage(card: object, deckName: string) {
+  card = { id: uuid.v4(), ...card }
+  return getDecksStorage().then((decks) => {
+    if (decks) {
+      decks = JSON.parse(decks)
+      decks = decks.map((deck) => {
+        if (deck.name === deckName) {
+          deck.cards = deck.cards.concat(card)
+        }
+        return deck
+      })
+      console.log('AddCards', decks)
+      return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks)).then(
+        () => decks
+      )
+    } else {
+      return undefined
+    }
+  })
+}
+
+export function removeCardStorage(cardId: string, deckName: string) {}

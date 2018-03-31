@@ -1,10 +1,21 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import MainToolbar from '../components/MainToolbar'
 import ConfirmationModal from '../components/ConfirmationModal'
 import PropTypes from 'prop-types'
 import { removeDeck } from '../actions'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
+import { Button, Card } from 'react-native-paper'
+
+const CardsWrapper = styled.View`
+  height: 100px;
+  background-color: red;
+`
+
+const Btn = styled(Button)`
+  margin: 5px 20px 5px 20px;
+`
 
 class DeckDetailView extends Component {
   static propTypes = {
@@ -36,6 +47,13 @@ class DeckDetailView extends Component {
     this.props.removeDeck(name).then((result) => this.props.navigation.goBack())
   }
 
+  addCard() {
+    const { name } = this.state.deck
+    this.props.navigation.navigate('NewCard', { name })
+  }
+
+  startQuiz() {}
+
   render() {
     const { deck, visible } = this.state
     const name = deck ? deck.name : ''
@@ -46,6 +64,21 @@ class DeckDetailView extends Component {
           onRemove={() => this._showModal()}
           onBackPress={() => this.props.navigation.goBack()}
         />
+        <CardsWrapper>
+          <ScrollView horizontal={true}>
+            <Card />
+            <Card />
+            <Card />
+          </ScrollView>
+        </CardsWrapper>
+
+        <Btn raised primary onPress={() => this.addCard()}>
+          Add Card
+        </Btn>
+        <Btn raised onPress={() => this.startQuiz()}>
+          Start Quiz
+        </Btn>
+
         <ConfirmationModal
           isToggle={visible}
           onCancel={() => this._hideModal()}
