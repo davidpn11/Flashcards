@@ -52,6 +52,11 @@ export const removeDeck = (name: string) => (dispatch) => {
   })
 }
 
-export const addCard = (card: object, deckName: string) => {
-  addCardStorage(card, deckName).then((deck) => console.log('yahaaaa', deck))
+export const addCard = (card: object, deckName: string) => (dispatch) => {
+  return addCardStorage(card, deckName).then((decks) =>
+    dispatch({
+      type: ADD_CARD,
+      data: decks,
+    })
+  )
 }

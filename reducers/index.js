@@ -17,7 +17,6 @@ function deckReducer(state = initialState, action) {
     case REMOVE_DECK:
       return state.filter((deck) => deck.name !== action.data)
     case ADD_CARD:
-      console.log('addcard', action.data)
       return action.data
     default:
       return state

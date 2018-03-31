@@ -56,12 +56,11 @@ export function addCardStorage(card: object, deckName: string) {
         }
         return deck
       })
-      console.log('AddCards', decks)
       return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks)).then(
         () => decks
       )
     } else {
-      return undefined
+      return new Error()
     }
   })
 }

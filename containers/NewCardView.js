@@ -14,6 +14,7 @@ const Container = styled.View`
 class NewCardView extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
+    addCard: PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -32,7 +33,10 @@ class NewCardView extends Component {
 
   addNewCard() {
     const { question, answer, deckName } = this.state
-    addCard({ question, answer }, deckName)
+    this.props
+      .addCard({ question, answer }, deckName)
+      .then(() => this.props.navigation.goBack())
+      .catch((err) => console.log(err))
   }
 
   render() {
@@ -69,4 +73,4 @@ class NewCardView extends Component {
   }
 }
 
-export default NewCardView
+export default connect(null, { addCard })(NewCardView)
