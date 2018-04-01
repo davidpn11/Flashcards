@@ -9,25 +9,22 @@ import {
 import { Text, Dimensions } from 'react-native'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { colorAccent } from '../utils/colors'
 const { height, width } = Dimensions.get('window')
 const cardWidth = width - 100
-
 const CardWrapper = styled(Card)`
   width: ${cardWidth};
   margin: 5px 20px 5px 20px;
   padding: 10px;
 `
-
 const QuestionWrapper = styled.View`
   width: 100%;
   min-height: 50px;
 `
-
 const AnswerWrapper = styled.View`
   width: 100%;
   min-height: 50px;
 `
-
 const Actions = styled(CardActions)`
   display: flex;
   justify-content: flex-end;
@@ -56,7 +53,10 @@ class Flashcard extends Component {
           </AnswerWrapper>
         ) : (
           <Actions>
-            <Button primary onPress={() => this.setState({ showAnswer: true })}>
+            <Button
+              color={colorAccent}
+              onPress={() => this.setState({ showAnswer: true })}
+            >
               Show Answer
             </Button>
           </Actions>
