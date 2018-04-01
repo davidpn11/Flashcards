@@ -19,11 +19,11 @@ function MainToolbar({ onBackPress, onSearch, title, subtitle, onRemove }) {
 }
 
 MainToolbar.propTypes = {
-  onBackPress: PropTypes.func.isRequired,
-  onSearch: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  onRemove: PropTypes.func.isRequired,
+  onBackPress: PropTypes.func,
+  onSearch: PropTypes.func,
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  onRemove: PropTypes.func,
 }
 
 export default MainToolbar

@@ -7,11 +7,8 @@ import { removeDeck } from '../actions'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { Button, Card } from 'react-native-paper'
-
-const CardsWrapper = styled.View`
-  height: 100px;
-  background-color: red;
-`
+import FlashcardList from '../components/FlashcardList'
+const CardsWrapper = styled.View``
 
 const Btn = styled(Button)`
   margin: 5px 20px 5px 20px;
@@ -34,7 +31,7 @@ class DeckDetailView extends Component {
   }
 
   state = {
-    deck: undefined,
+    deck: {},
     visible: false,
   }
 
@@ -56,7 +53,9 @@ class DeckDetailView extends Component {
 
   render() {
     const { deck, visible } = this.state
-    const name = deck ? deck.name : ''
+    const name = deck.name ? deck.name : ''
+    const cards = deck.cards ? deck.cards : []
+
     return (
       <View style={{ flex: 1 }}>
         <MainToolbar
@@ -65,11 +64,7 @@ class DeckDetailView extends Component {
           onBackPress={() => this.props.navigation.goBack()}
         />
         <CardsWrapper>
-          <ScrollView horizontal={true}>
-            <Card />
-            <Card />
-            <Card />
-          </ScrollView>
+          <FlashcardList cards={cards} />
         </CardsWrapper>
 
         <Btn raised primary onPress={() => this.addCard()}>
