@@ -28,13 +28,13 @@ export function getDecks() {
 
 export const addDeck = (deck: object) => (dispatch) => {
   const newDeck = { cards: [], ...deck }
-  return addDeckStorage(newDeck).then((result) => {
-    if (result) {
+  return addDeckStorage(newDeck).then((decks) => {
+    if (decks instanceof Error) {
       return Promise.reject(new Error('name already exists'))
     }
     return dispatch({
       type: ADD_DECK,
-      data: newDeck,
+      data: decks,
     })
   })
 }

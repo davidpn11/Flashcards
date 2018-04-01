@@ -13,7 +13,7 @@ function deckReducer(state = initialState, action) {
     case GET_DECKS:
       return action.data
     case ADD_DECK:
-      return [action.data, ...state]
+      return action.data
     case REMOVE_DECK:
       return state.filter((deck) => deck.name !== action.data)
     case ADD_CARD:

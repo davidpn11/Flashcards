@@ -23,8 +23,12 @@ export function addDeckStorage(deck: object) {
       }
       const decks = [deck, ...result]
       return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
+        .then(() => decks)
+        .catch((err) => new Error(err))
     } else {
       return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify([deck]))
+        .then(() => [deck])
+        .catch((err) => new Error(err))
     }
   })
 }
@@ -56,9 +60,9 @@ export function addCardStorage(card: object, deckName: string) {
         }
         return deck
       })
-      return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks)).then(
-        () => decks
-      )
+      return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
+        .then(() => decks)
+        .catch((err) => new Error(err))
     } else {
       return new Error()
     }
