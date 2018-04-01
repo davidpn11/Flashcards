@@ -5,14 +5,9 @@ import {
   ToolbarContent,
   ToolbarAction,
 } from 'react-native-paper'
+import PropTypes from 'prop-types'
 
-export default function MainToolbar({
-  onBackPress,
-  onSearch,
-  title,
-  subtitle,
-  onRemove,
-}) {
+function MainToolbar({ onBackPress, onSearch, title, subtitle, onRemove }) {
   return (
     <Toolbar>
       {onBackPress && <ToolbarBackAction onPress={onBackPress} />}
@@ -22,3 +17,13 @@ export default function MainToolbar({
     </Toolbar>
   )
 }
+
+MainToolbar.propTypes = {
+  onBackPress: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
+  onRemove: PropTypes.func.isRequired,
+}
+
+export default MainToolbar
