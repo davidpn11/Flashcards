@@ -21,7 +21,6 @@ class NewCardView extends Component {
     try {
       const { name } = this.props.navigation.state.params
       this.setState({ deckName: name })
-      console.log('new card', name)
     } catch (err) {}
   }
 

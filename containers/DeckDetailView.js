@@ -22,13 +22,11 @@ class DeckDetailView extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
     this.props.deck && this.setState({ deck: this.props.deck })
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.deck !== nextProps.deck) {
-      console.log('componentWillReceiveProps')
       this.setState({ deck: nextProps.deck })
     }
   }

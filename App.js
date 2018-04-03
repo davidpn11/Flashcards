@@ -65,10 +65,6 @@ const theme = {
 }
 
 class App extends Component {
-  addDeck(event) {
-    console.log('teste')
-  }
-
   render() {
     return (
       <Provider
