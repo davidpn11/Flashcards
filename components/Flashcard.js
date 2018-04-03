@@ -34,7 +34,7 @@ const Actions = styled(CardActions)`
 class Flashcard extends Component {
   static propTypes = {
     cardData: PropTypes.object.isRequired,
-    removeCard: PropTypes.func.isRequired,
+    onRemove: PropTypes.func.isRequired,
   }
 
   state = {
@@ -42,7 +42,7 @@ class Flashcard extends Component {
   }
 
   render() {
-    const { cardData, removeCard } = this.props
+    const { cardData, onRemove } = this.props
     return (
       <View>
         <CardWrapper>
@@ -55,10 +55,7 @@ class Flashcard extends Component {
             </AnswerWrapper>
           ) : (
             <Actions>
-              <Button
-                onPress={() => removeCard(cardData.id)}
-                color={cancelColor}
-              >
+              <Button onPress={() => onRemove(cardData.id)} color={cancelColor}>
                 Delete
               </Button>
               <Button

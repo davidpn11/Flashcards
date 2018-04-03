@@ -79,7 +79,6 @@ export function removeCardStorage(cardId: string, deckName: string) {
         }
         return deck
       })
-      console.log('remove storage', decks)
       return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
         .then(() => decks)
         .catch((err) => new Error(err))

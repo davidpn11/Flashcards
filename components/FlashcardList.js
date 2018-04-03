@@ -11,10 +11,13 @@ class FlashcardList extends Component {
   static propTypes = {
     cards: PropTypes.array.isRequired,
     removeCard: PropTypes.func.isRequired,
+    deckName: PropTypes.string.isRequired,
   }
 
   removeLocalCard(id) {
-    console.log('remove', id)
+    this.props
+      .removeCard(id, this.props.deckName)
+      .catch((err) => console.error(err))
   }
 
   getCards() {
@@ -23,7 +26,7 @@ class FlashcardList extends Component {
       <Flashcard
         key={card.id}
         cardData={card}
-        removeCard={this.removeLocalCard}
+        onRemove={(id) => this.removeLocalCard(id)}
       />
     ))
   }

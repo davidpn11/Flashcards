@@ -63,7 +63,6 @@ export const addCard = (card: object, deckName: string) => (dispatch) => {
 
 export const removeCard = (cardId: string, deckName: string) => (dispatch) => {
   return removeCardStorage(cardId, deckName).then((result) => {
-    console.log('removeCar', result)
     if (result instanceof Error) {
       return Promise.reject(new Error('error deleting'))
     }

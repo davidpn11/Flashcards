@@ -64,7 +64,7 @@ class DeckDetailView extends Component {
           onBackPress={() => this.props.navigation.goBack()}
         />
         <CardsWrapper>
-          <FlashcardList cards={cards} />
+          <FlashcardList cards={cards} deckName={name} />
         </CardsWrapper>
 
         <Btn raised primary onPress={() => this.addCard()}>
