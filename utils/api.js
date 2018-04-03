@@ -69,4 +69,22 @@ export function addCardStorage(card: object, deckName: string) {
   })
 }
 
-export function removeCardStorage(cardId: string, deckName: string) {}
+export function removeCardStorage(cardId: string, deckName: string) {
+  return getDecksStorage().then((decks) => {
+    if (decks) {
+      decks = JSON.parse(decks)
+      decks = decks.map((deck) => {
+        if (deck.name === deckName) {
+          deck.cards = deck.cards.filter((card) => card.id !== cardId)
+        }
+        return deck
+      })
+      console.log('remove storage', decks)
+      return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
+        .then(() => decks)
+        .catch((err) => new Error(err))
+    } else {
+      return new Error()
+    }
+  })
+}
