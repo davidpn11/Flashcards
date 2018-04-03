@@ -3,7 +3,7 @@ import { View, Text, ScrollView } from 'react-native'
 import MainToolbar from '../components/MainToolbar'
 import ConfirmationModal from '../components/ConfirmationModal'
 import PropTypes from 'prop-types'
-import { removeDeck } from '../actions'
+import { removeDeck, getDecks } from '../actions'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { Button, Card } from 'react-native-paper'
@@ -18,20 +18,22 @@ class DeckDetailView extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     removeDeck: PropTypes.func.isRequired,
+    deck: PropTypes.object.isRequired,
   }
 
   componentDidMount() {
-    try {
-      const { deck } = this.props.navigation.state.params
-      deck = JSON.parse(deck)
-      this.setState({ deck })
-    } catch (err) {
-      console.log(err)
+    console.log('componentDidMount')
+    this.props.deck && this.setState({ deck: this.props.deck })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.deck !== nextProps.deck) {
+      console.log('componentWillReceiveProps')
+      this.setState({ deck: nextProps.deck })
     }
   }
 
   state = {
-    deck: {},
     visible: false,
   }
 
@@ -39,7 +41,7 @@ class DeckDetailView extends Component {
   _hideModal = () => this.setState({ visible: false })
 
   removeDeck() {
-    const { name } = this.state.deck
+    const { name } = this.props.deck
     this._hideModal()
     this.props.removeDeck(name).then((result) => this.props.navigation.goBack())
   }
@@ -53,8 +55,8 @@ class DeckDetailView extends Component {
 
   render() {
     const { deck, visible } = this.state
-    const name = deck.name ? deck.name : ''
-    const cards = deck.cards ? deck.cards : []
+    const name = deck ? deck.name : ''
+    const cards = deck ? deck.cards : []
 
     return (
       <View style={{ flex: 1 }}>
@@ -85,4 +87,12 @@ class DeckDetailView extends Component {
   }
 }
 
-export default connect(null, { removeDeck })(DeckDetailView)
+function mapStateToProps(state, ownProps) {
+  const { name } = ownProps.navigation.state.params
+  const deck = state.decks.find((d) => d.name === name)
+  return { deck }
+}
+
+export default connect(mapStateToProps, { removeDeck, getDecks })(
+  DeckDetailView
+)

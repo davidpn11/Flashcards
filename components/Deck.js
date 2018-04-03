@@ -29,8 +29,7 @@ const NCards = styled.Text`
 class Deck extends Component {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired,
-    nCards: PropTypes.number.isRequired,
+    deck: PropTypes.object.isRequired,
   }
 
   state = {
@@ -49,13 +48,13 @@ class Deck extends Component {
   }
 
   render() {
-    const { onClick, name, nCards } = this.props
+    const { onClick, deck } = this.props
     const { marginLeft } = this.state
     return (
       <Animated.View style={{ marginLeft }}>
-        <DeckCard onPress={() => this.props.onClick(this.props.name)}>
-          <Title>{name}</Title>
-          <NCards>{nCards} cards</NCards>
+        <DeckCard onPress={() => this.props.onClick(deck.name)}>
+          <Title>{deck.name}</Title>
+          <NCards>{deck.cards.length} cards</NCards>
         </DeckCard>
       </Animated.View>
     )

@@ -24,19 +24,13 @@ class DeckList extends Component {
   }
 
   openDeck(name) {
-    const deck = this.props.decks.find((d) => d.name === name)
-    this.props.openDeck(deck)
+    this.props.openDeck(name)
   }
 
   getUserDecks() {
     const { decks } = this.props
     return _.map(decks, (el) => (
-      <Deck
-        key={el.name}
-        onClick={(name) => this.openDeck(name)}
-        name={el.name}
-        nCards={el.cards.length}
-      />
+      <Deck key={el.name} onClick={(id) => this.openDeck(id)} deck={el} />
     ))
   }
 

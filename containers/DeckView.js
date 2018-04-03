@@ -12,9 +12,8 @@ class DeckView extends Component {
 
   searchDeck() {}
 
-  openDeck(deck) {
-    deck = JSON.stringify(deck)
-    this.props.navigation.navigate('DeckDetail', { deck })
+  openDeck(name) {
+    this.props.navigation.navigate('DeckDetail', { name })
   }
 
   render() {
