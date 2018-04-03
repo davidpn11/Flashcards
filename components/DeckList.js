@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, Dimensions } from 'react-native'
 import Deck from './Deck'
 import { connect } from 'react-redux'
 import { getDecks } from '../actions'
 import PropTypes from 'prop-types'
+import NotFound from '../components/NotFound'
+import { gray400 } from '../utils/colors'
 import * as _ from 'lodash'
 import styled from 'styled-components'
+
+const { height, width } = Dimensions.get('window')
 
 const Wrapper = styled.View`
   position: relative;
@@ -27,17 +31,28 @@ class DeckList extends Component {
     this.props.openDeck(name)
   }
 
-  getUserDecks() {
-    const { decks } = this.props
+  getUserDecks(decks) {
     return _.map(decks, (el) => (
       <Deck key={el.name} onClick={(id) => this.openDeck(id)} deck={el} />
     ))
   }
 
   render() {
+    const { decks } = this.props
     return (
       <Wrapper>
-        <ScrollView>{this.getUserDecks()}</ScrollView>
+        {decks.length > 0 ? (
+          <ScrollView>{this.getUserDecks(decks)}</ScrollView>
+        ) : (
+          <View style={{ width: width - 40, height: height - 100 }}>
+            <NotFound
+              messageText="You don't have any decks"
+              fontSize={20}
+              iconSize={50}
+              color={gray400}
+            />
+          </View>
+        )}
       </Wrapper>
     )
   }
