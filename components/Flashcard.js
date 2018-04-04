@@ -15,6 +15,8 @@ const cardWidth = width - 100
 const CardWrapper = styled(Card)`
   width: ${cardWidth};
   margin: 5px 20px 5px 20px;
+  display: flex;
+  align-items: stretch;
 `
 const QuestionWrapper = styled.View`
   width: 100%;

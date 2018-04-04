@@ -41,7 +41,7 @@ class DeckList extends Component {
     const { decks } = this.props
     return (
       <Wrapper>
-        {decks.length > 0 ? (
+        {decks && decks.length > 0 ? (
           <ScrollView>{this.getUserDecks(decks)}</ScrollView>
         ) : (
           <View style={{ width: width - 40, height: height - 100 }}>

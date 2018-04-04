@@ -49,7 +49,11 @@ class DeckDetailView extends Component {
     this.props.navigation.navigate('NewCard', { name })
   }
 
-  startQuiz() {}
+  startQuiz() {
+    console.log('quiz')
+    const { name } = this.state.deck
+    this.props.navigation.navigate('Quiz', { name })
+  }
 
   render() {
     const { deck, visible } = this.state
@@ -70,7 +74,11 @@ class DeckDetailView extends Component {
         <Btn raised primary onPress={() => this.addCard()}>
           Add Card
         </Btn>
-        <Btn raised onPress={() => this.startQuiz()}>
+        <Btn
+          raised
+          disabled={cards.length === 0}
+          onPress={() => this.startQuiz()}
+        >
           Start Quiz
         </Btn>
 
