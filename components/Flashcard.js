@@ -20,7 +20,7 @@ const CardWrapper = styled(Card)`
 `
 const QuestionWrapper = styled.View`
   width: 100%;
-  min-height: 50px;
+  min-height: 100px;
   padding: 10px;
 `
 const AnswerWrapper = styled.View`
