@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Text, Image, View } from 'react-native'
-import { Button } from 'react-native-paper'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Entypo } from '@expo/vector-icons'
