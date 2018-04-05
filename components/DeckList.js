@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { View, ScrollView, Dimensions } from 'react-native'
 import Deck from './Deck'
-import { connect } from 'react-redux'
-import { getDecks } from '../actions'
 import PropTypes from 'prop-types'
 import NotFound from '../components/NotFound'
 import { gray400 } from '../utils/colors'
@@ -18,13 +16,8 @@ const Wrapper = styled.View`
 
 class DeckList extends Component {
   static propTypes = {
-    decks: PropTypes.any,
-    getDecks: PropTypes.any,
+    decks: PropTypes.array.isRequired,
     openDeck: PropTypes.func.isRequired,
-  }
-
-  componentDidMount() {
-    this.props.getDecks && this.props.getDecks()
   }
 
   openDeck(name) {
@@ -58,8 +51,4 @@ class DeckList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { decks: state.decks }
-}
-
-export default connect(mapStateToProps, { getDecks })(DeckList)
+export default DeckList
