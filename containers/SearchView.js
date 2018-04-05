@@ -31,7 +31,6 @@ class SearchView extends Component {
   }
 
   openDeck(name) {
-    console.log(name)
     this.props.navigation.navigate('DeckDetail', { name })
   }
 
@@ -67,7 +66,7 @@ class SearchView extends Component {
         </SearchBox>
         <DeckList
           decks={filteredDecks}
-          openDeck={(deck) => this.openDeck(deck)}
+          openDeck={(name) => this.openDeck(name)}
         />
       </View>
     )
