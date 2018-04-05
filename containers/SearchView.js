@@ -37,6 +37,12 @@ class SearchView extends Component {
   componentDidMount() {
     const { decks } = this.props
     this.setState({ decks })
+    this.throttleSearch = _.throttle(this.makeSearch, 500)
+  }
+
+  setSearchText(searchInput) {
+    this.setState({ searchInput })
+    this.throttleSearch(searchInput)
   }
 
   makeSearch(searchInput) {
@@ -44,7 +50,7 @@ class SearchView extends Component {
     filteredDecks = decks.filter(
       (deck) => deck.name.indexOf(searchInput) !== -1
     )
-    this.setState({ searchInput, filteredDecks })
+    this.setState({ filteredDecks })
   }
 
   render() {
@@ -57,9 +63,10 @@ class SearchView extends Component {
         />
         <SearchBox>
           <SearchTextInput
+            autoFocus
             label="Search"
             value={this.state.searchInput}
-            onChangeText={(searchInput) => this.makeSearch(searchInput)}
+            onChangeText={(searchInput) => this.setSearchText(searchInput)}
           />
         </SearchBox>
         <DeckList
