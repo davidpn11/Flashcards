@@ -40,7 +40,6 @@ export const addDeck = (deck: object) => (dispatch) => {
 }
 
 export const removeDeck = (name: string) => (dispatch) => {
-  removeDeckStorage(name)
   return removeDeckStorage(name).then((result) => {
     if (result) {
       return Promise.reject(new Error('something went wrong'))
