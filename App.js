@@ -20,6 +20,7 @@ import NewDeckView from './containers/NewDeckView'
 import DeckDetailView from './containers/DeckDetailView'
 import NewCardView from './containers/NewCardView'
 import QuizView from './containers/QuizView'
+import SearchView from './containers/SearchView'
 import { StackNavigator } from 'react-navigation'
 import MainToolbar from './components/MainToolbar'
 import thunk from 'redux-thunk'
@@ -42,6 +43,9 @@ const MainNav = StackNavigator(
     },
     Quiz: {
       screen: QuizView,
+    },
+    SearchDeck: {
+      screen: SearchView,
     },
   },
   {

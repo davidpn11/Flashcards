@@ -31,7 +31,7 @@ class DeckView extends Component {
           onSearch={() => this.props.navigation.navigate('SearchDeck')}
         />
         <View style={styles.container}>
-          <DeckList decks={decks} openDeck={(deck) => this.openDeck(deck)} />
+          <DeckList decks={decks} openDeck={(name) => this.openDeck(name)} />
           <FAB
             style={styles.fabStyle}
             medium
