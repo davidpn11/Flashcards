@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import QuizCard from '../components/QuizCard'
 import AnswerOption from '../components/AnswerOptions'
 import ResultCard from '../components/ResultCard'
+import { clearLocalNotifications, setLocalNotification } from '../utils/helpers'
 const Wrapper = styled.View`
   height: 70%;
   position: relative;
@@ -45,6 +46,7 @@ class QuizView extends Component {
       current = cards.shift()
       this.setState({ current, answered, cards })
     } else {
+      clearLocalNotifications().then(() => setLocalNotification())
       this.setState({ isQuizFinished: true, answered, current: {} })
     }
   }

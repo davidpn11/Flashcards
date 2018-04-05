@@ -6,6 +6,7 @@ import {
   colorAccent,
   whitesmoke,
 } from './utils/colors'
+import { setLocalNotification } from './utils/helpers'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
@@ -65,6 +66,10 @@ const theme = {
 }
 
 class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider
