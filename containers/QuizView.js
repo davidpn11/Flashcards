@@ -31,6 +31,7 @@ class QuizView extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     deck: PropTypes.object.isRequired,
+    getDecks: PropTypes.func.isRequired,
   }
 
   state = {
@@ -50,7 +51,6 @@ class QuizView extends Component {
 
   setAnswer(isCorrect) {
     let { current, answered, cards, total } = this.state
-    console.log(cards.length)
     const answer = { id: current.id, question: current.question, isCorrect }
     answered = [answer, ...answered]
     if (cards.length !== 0) {
@@ -69,11 +69,18 @@ class QuizView extends Component {
   }
 
   startQuiz() {
-    this.setState({ cards: this.props.deck.cards }, () => {
-      let { cards } = this.state
+    let { cards } = this.props.deck
+    cards = Object.create(cards)
+    this.setState({ cards }, () => {
       const total = cards.length
       const current = cards.shift()
-      this.setState({ cards, current, total })
+      this.setState({
+        cards,
+        current,
+        total,
+        isQuizFinished: false,
+        answered: [],
+      })
     })
   }
 
