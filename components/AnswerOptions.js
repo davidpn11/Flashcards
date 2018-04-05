@@ -12,7 +12,6 @@ import {
 } from '../utils/colors'
 
 const { width } = Dimensions.get('window')
-console.log(width)
 const Wrapper = styled.View`
   flex-direction: row;
   margin: 10px 30px;

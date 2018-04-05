@@ -35,7 +35,7 @@ class NewCardView extends Component {
     this.props
       .addCard({ question, answer }, deckName)
       .then(() => this.props.navigation.goBack())
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
   }
 
   render() {

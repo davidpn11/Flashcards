@@ -44,8 +44,6 @@ class SearchView extends Component {
     filteredDecks = decks.filter(
       (deck) => deck.name.indexOf(searchInput) !== -1
     )
-    console.log(searchInput)
-    console.log(filteredDecks)
     this.setState({ searchInput, filteredDecks })
   }
 

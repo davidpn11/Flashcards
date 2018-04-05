@@ -50,7 +50,6 @@ class DeckDetailView extends Component {
   }
 
   startQuiz() {
-    console.log('quiz')
     const { name } = this.state.deck
     this.props.navigation.navigate('Quiz', { name })
   }

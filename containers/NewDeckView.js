@@ -22,7 +22,7 @@ class NewDeckView extends Component {
       .addDeck({ name })
       .then(() => this.props.navigation.navigate('DeckDetail', { name }))
       .catch((err) => {
-        console.log('err', err)
+        console.error('err', err)
         alert(err.message.toUpperCase())
       })
   }
