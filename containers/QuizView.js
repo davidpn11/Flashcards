@@ -9,7 +9,9 @@ import { connect } from 'react-redux'
 import QuizCard from '../components/QuizCard'
 import AnswerOption from '../components/AnswerOptions'
 import ResultCard from '../components/ResultCard'
+import ConfirmationModal from '../components/ConfirmationModal'
 import { clearLocalNotifications, setLocalNotification } from '../utils/helpers'
+
 const Wrapper = styled.View`
   height: 70%;
   position: relative;
@@ -32,9 +34,18 @@ class QuizView extends Component {
   }
 
   state = {
+    modalVisible: false,
     isQuizFinished: false,
     current: {},
     answered: [],
+  }
+
+  _showModal = () => this.setState({ modalVisible: true })
+  _hideModal = () => this.setState({ modalVisible: false })
+
+  backToDeckDetails() {
+    this._hideModal()
+    this.props.navigation.goBack()
   }
 
   setAnswer(isCorrect) {
@@ -57,29 +68,36 @@ class QuizView extends Component {
     return `${missing}/${total}`
   }
 
+  startQuiz() {
+    this.setState({ cards: this.props.deck.cards }, () => {
+      let { cards } = this.state
+      const total = cards.length
+      const current = cards.shift()
+      this.setState({ cards, current, total })
+    })
+  }
+
   componentDidMount() {
-    this.props.deck &&
-      this.setState({ cards: this.props.deck.cards }, () => {
-        let { cards } = this.state
-        const total = cards.length
-        const current = cards.shift()
-        this.setState({ cards, current, total })
-      })
+    this.props.deck && this.startQuiz()
   }
 
   render() {
-    let { current, isQuizFinished, answered } = this.state
+    let { current, isQuizFinished, answered, modalVisible } = this.state
     return (
       <Wrapper>
         <MainToolbar
           title={isQuizFinished ? 'RESULTS' : 'QUIZ'}
-          onBackPress={() => this.props.navigation.goBack()}
+          onBackPress={() =>
+            isQuizFinished && !modalVisible
+              ? this.props.navigation.goBack()
+              : this.setState({ modalVisible: true })
+          }
         />
         {!isQuizFinished ? (
           <View>
             <Counter>{this.setCounter()}</Counter>
             <ContentWrapper>
-              <QuizCard cardData={current} />
+              <QuizCard cardData={current || {}} />
               <AnswerOption
                 setAnswer={(isCorrect) => this.setAnswer(isCorrect)}
               />
@@ -97,8 +115,17 @@ class QuizView extends Component {
             >
               Back to Deck
             </Button>
+            <Button primary onPress={() => this.startQuiz()}>
+              Restart Quiz
+            </Button>
           </View>
         )}
+        <ConfirmationModal
+          isToggle={modalVisible}
+          onCancel={() => this._hideModal()}
+          onConfirm={() => this.backToDeckDetails()}
+          modalText="Do you want to exit the quiz?"
+        />
       </Wrapper>
     )
   }

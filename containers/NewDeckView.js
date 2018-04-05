@@ -20,7 +20,7 @@ class NewDeckView extends Component {
     const { name } = this.state
     this.props
       .addDeck({ name })
-      .then(() => this.props.navigation.goBack())
+      .then(() => this.props.navigation.navigate('DeckDetail', { name }))
       .catch((err) => {
         console.log('err', err)
         alert(err.message.toUpperCase())

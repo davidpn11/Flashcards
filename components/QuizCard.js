@@ -54,7 +54,7 @@ class QuizCard extends Component {
   }
 
   render() {
-    const { cardData } = this.props
+    let { cardData } = this.props
     return (
       <CardWrapper>
         <QuestionWrapper>

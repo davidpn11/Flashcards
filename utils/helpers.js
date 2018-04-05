@@ -19,9 +19,9 @@ export const touchableBackground = (color, fixRadius) => {
   return undefined
 }
 
-export function clearLocalNotification() {
-  AsyncStorage.removeItem(NOTIFICATION_KEY).then(() =>
-    Notifications.cancelAllScheduledNotificationAsync()
+export function clearLocalNotifications() {
+  return AsyncStorage.removeItem(NOTIFICATION_KEY).then(
+    Notifications.cancelAllScheduledNotificationsAsync()
   )
 }
 
