@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { addDeck } from '../actions'
 import { connect } from 'react-redux'
 import { TextInput, Button } from 'react-native-paper'
+import { NavigationActions } from 'react-navigation'
 
 class NewDeckView extends Component {
   static propTypes = {
@@ -20,7 +21,20 @@ class NewDeckView extends Component {
     const { name } = this.state
     this.props
       .addDeck({ name })
-      .then(() => this.props.navigation.navigate('DeckDetail', { name }))
+      .then(() => {
+        console.log(this.props.navigation)
+        const reset = NavigationActions.reset({
+          index: 1,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Home' }),
+            NavigationActions.navigate({
+              routeName: 'DeckDetail',
+              params: { name },
+            }),
+          ],
+        })
+        this.props.navigation.dispatch(reset)
+      })
       .catch((err) => {
         console.error('err', err)
         alert(err.message.toUpperCase())
